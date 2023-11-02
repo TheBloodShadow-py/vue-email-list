@@ -6,11 +6,12 @@ createApp({
   data() {
     return {
       emails: [],
+      max: 10,
     };
   },
   methods: {
-    getEmails: function (num) {
-      for (let i = 0; i < num; i++) {
+    getEmails: function (max) {
+      for (let i = 0; i < max; i++) {
         axios.get("https://flynn.boolean.careers/exercises/api/random/mail").then((resp) => {
           this.emails.push(resp.data.response);
         });
@@ -18,6 +19,8 @@ createApp({
     },
   },
   created() {
-    this.getEmails(10);
+    setTimeout(() => {
+      this.getEmails(this.max);
+    }, 1000);
   },
 }).mount("#app");
